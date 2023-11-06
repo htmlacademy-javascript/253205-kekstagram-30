@@ -33,11 +33,28 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
+const getRandomIntInclusive = (min, max) => {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+const getSetOfNumbers = (a,b) => {
+  const setOfNumber = [];
+  for (let i = a; i <= b; i++) {
+    setOfNumber.push(i);
+  }
+  return setOfNumber;
+};
+
+const CURRENT_SET_OF_NUMBERS = getSetOfNumbers (0,200);
+const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+
 const photoComments = () => {
-  const randomNumber = getRandomInteger(1,999);
-  const randomAvatar = getRandomInteger(1,6);
-  const randomMessageIndex = getRandomInteger(0,MESSAGES.length - 1);
-  const randomNameIndex = getRandomInteger(0,NAMES.length - 1);
+  const randomNumber = getRandomIntInclusive(CURRENT_SET_OF_NUMBERS[0], CURRENT_SET_OF_NUMBERS.length);
+  const randomAvatar = getRandomInteger(CURRENT_SET_OF_NUMBERS[1], CURRENT_SET_OF_NUMBERS[6]);
+  const randomMessageIndex = getRandomArrayElement(MESSAGES);
+  const randomNameIndex = getRandomArrayElement(NAMES);
 
   return {
     id: randomNumber,
@@ -47,14 +64,14 @@ const photoComments = () => {
   };
 };
 
-const randomComments = getRandomInteger(0,30);
+const randomComments = getRandomInteger(CURRENT_SET_OF_NUMBERS[0], CURRENT_SET_OF_NUMBERS[30]);
 const similiarComemnts = Array.from({length: randomComments}, photoComments);
 
 const photoDescription = () => {
-  const randomId = getRandomInteger(1, 25);
-  const randomPhotoNumber = getRandomInteger(1, 25);
-  const randomDescriptionIndex = getRandomInteger(0, DESCRIPTION.length - 1);
-  const randomLike = getRandomInteger(15, 200);
+  const randomId = getRandomInteger(CURRENT_SET_OF_NUMBERS[1], CURRENT_SET_OF_NUMBERS[25]);
+  const randomPhotoNumber = getRandomInteger(CURRENT_SET_OF_NUMBERS[1], CURRENT_SET_OF_NUMBERS[25]);
+  const randomDescriptionIndex = getRandomArrayElement(DESCRIPTION);
+  const randomLike = getRandomInteger(CURRENT_SET_OF_NUMBERS[15], CURRENT_SET_OF_NUMBERS[200]);
 
   return {
     id: randomId,
@@ -65,4 +82,4 @@ const photoDescription = () => {
   };
 };
 
-console.log(photoDescription());
+photoDescription();
