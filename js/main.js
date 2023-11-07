@@ -18,7 +18,7 @@ const NAMES = [
   'Вашингтон',
 ];
 
-const DESCRIPTION = [
+const DESCRIPTIONS = [
   'Самый лучший день!',
   'Классная погода!',
   'Я и моя любимая еда.',
@@ -39,44 +39,35 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const getSetOfNumbers = (a,b) => {
-  const setOfNumber = [];
-  for (let i = a; i <= b; i++) {
-    setOfNumber.push(i);
-  }
-  return setOfNumber;
-};
-
-const CURRENT_SET_OF_NUMBERS = getSetOfNumbers (0,200);
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const photoComments = () => {
-  const randomNumber = getRandomIntInclusive(CURRENT_SET_OF_NUMBERS[0], CURRENT_SET_OF_NUMBERS.length);
-  const randomAvatar = getRandomInteger(CURRENT_SET_OF_NUMBERS[1], CURRENT_SET_OF_NUMBERS[6]);
-  const randomMessageIndex = getRandomArrayElement(MESSAGES);
-  const randomNameIndex = getRandomArrayElement(NAMES);
+  const randomNumber = getRandomIntInclusive(0, 200);
+  const randomAvatar = getRandomInteger(1, 6);
+  const randomMessage = getRandomArrayElement(MESSAGES);
+  const randomName = getRandomArrayElement(NAMES);
 
   return {
     id: randomNumber,
     avatar: `img/avatar${randomAvatar}.svg`,
-    message: MESSAGES[randomMessageIndex],
-    name: NAMES[randomNameIndex],
+    message: randomMessage,
+    name: randomName,
   };
 };
 
-const randomComments = getRandomInteger(CURRENT_SET_OF_NUMBERS[0], CURRENT_SET_OF_NUMBERS[30]);
+const randomComments = getRandomInteger(0, 30);
 const similiarComemnts = Array.from({length: randomComments}, photoComments);
 
 const photoDescription = () => {
-  const randomId = getRandomInteger(CURRENT_SET_OF_NUMBERS[1], CURRENT_SET_OF_NUMBERS[25]);
-  const randomPhotoNumber = getRandomInteger(CURRENT_SET_OF_NUMBERS[1], CURRENT_SET_OF_NUMBERS[25]);
-  const randomDescriptionIndex = getRandomArrayElement(DESCRIPTION);
-  const randomLike = getRandomInteger(CURRENT_SET_OF_NUMBERS[15], CURRENT_SET_OF_NUMBERS[200]);
+  const randomId = getRandomInteger(1, 25);
+  const randomPhotoNumber = getRandomInteger(1, 25);
+  const randomDescription = getRandomArrayElement(DESCRIPTIONS);
+  const randomLike = getRandomInteger(15, 200);
 
   return {
     id: randomId,
     url: `photos/${randomPhotoNumber}.jpg`,
-    description: DESCRIPTION[randomDescriptionIndex],
+    description: randomDescription,
     likes: randomLike,
     comments: similiarComemnts,
   };
