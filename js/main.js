@@ -1,3 +1,15 @@
+const MIN_PHOTO = 1;
+const MAX_PHOTO = 25;
+
+const MIN_LIKES = 15;
+const MAX_LIKES = 200;
+
+const MIN_COMMENTS = 0;
+const MAX_COMMENTS = 30;
+
+const MIN_AVATAR = 1;
+const MAX_AVATAR = 6;
+
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -33,17 +45,22 @@ const getRandomInteger = (a, b) => {
   return Math.floor(result);
 };
 
-const getRandomIntInclusive = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1) + min);
+const createId = () => {
+  let currentId = 0;
+
+  return () => {
+    currentId += 1;
+    return currentId;
+  };
+
 };
 
+const generateId = createId();
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
 const photoComments = () => {
-  const randomNumber = getRandomIntInclusive(0, 200);
-  const randomAvatar = getRandomInteger(1, 6);
+  const randomNumber = generateId();
+  const randomAvatar = getRandomInteger(MIN_AVATAR, MAX_AVATAR);
   const randomMessage = getRandomArrayElement(MESSAGES);
   const randomName = getRandomArrayElement(NAMES);
 
@@ -55,14 +72,14 @@ const photoComments = () => {
   };
 };
 
-const randomComments = getRandomInteger(0, 30);
+const randomComments = getRandomInteger(MIN_COMMENTS, MAX_COMMENTS);
 const similiarComemnts = Array.from({length: randomComments}, photoComments);
 
-const photoDescription = () => {
-  const randomId = getRandomInteger(1, 25);
-  const randomPhotoNumber = getRandomInteger(1, 25);
+const createPhoto = () => {
+  const randomId = getRandomInteger(MIN_PHOTO, MAX_PHOTO);
+  const randomPhotoNumber = getRandomInteger(MIN_PHOTO, MAX_PHOTO);
   const randomDescription = getRandomArrayElement(DESCRIPTIONS);
-  const randomLike = getRandomInteger(15, 200);
+  const randomLike = getRandomInteger(MIN_LIKES, MAX_LIKES);
 
   return {
     id: randomId,
@@ -73,4 +90,4 @@ const photoDescription = () => {
   };
 };
 
-photoDescription();
+createPhoto();
