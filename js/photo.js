@@ -1,6 +1,6 @@
 import { getRandomInteger } from './util.js';
 import { getRandomArrayElement } from './util.js';
-import { similiarComemnts } from './create-photo-comments.js';
+import { similiarComemnts } from './photo-comments.js';
 
 const MIN_PHOTO = 1;
 const MAX_PHOTO = 25;
