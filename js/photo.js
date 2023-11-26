@@ -16,6 +16,8 @@ const DESCRIPTIONS = [
   'Происки соседей'
 ];
 
+const RANDOM_PHOTO_COUNT = 12;
+
 const createPhoto = () => {
   const randomId = getRandomInteger(MIN_PHOTO, MAX_PHOTO);
   const randomPhotoNumber = getRandomInteger(MIN_PHOTO, MAX_PHOTO);
@@ -31,5 +33,7 @@ const createPhoto = () => {
   };
 };
 
-export {createPhoto};
+const createPhotos = () => Array.from({length: RANDOM_PHOTO_COUNT}, createPhoto);
+
+export {createPhotos};
 
